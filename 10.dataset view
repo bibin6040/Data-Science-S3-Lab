@@ -1,3 +1,17 @@
+Q1)
+=======
+Using the pandas function read_csv(), read the given ‘iris’ data set and perform the
+following:
+a. Shape of the data set.
+b. First 5 and last five rows of data set (head and tail).
+c. Size of data set.
+d. No. of samples available for each variety.
+e. Description of the data set( use describe)
+Using the iris data set perform seaborn - pairplot() and displot() functions
+=================================================================
+Prtogram
+=============
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
