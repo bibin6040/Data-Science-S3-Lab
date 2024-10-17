@@ -1,0 +1,105 @@
+# Import necessary libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+# Load the dataset
+advertising = pd.read_csv('company_data.csv')
+# Display the first few rows of the data
+print(advertising.head())
+#Scatter plot representation of data using seaborn
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.pairplot(advertising, x_vars=['TV', 'Radio', 'Newspaper'],
+y_vars='Sales', height=5, aspect=1, kind='scatter')
+plt.show()
+# Assuming 'Sales' is the dependent variable and the rest are features
+X = advertising.drop(columns=['Sales'])
+y = advertising['Sales']
+# Split the dataset into training and testing sets (80% training, 20% testing)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# Create the linear regression model
+model = LinearRegression()
+# Train the model on the training data
+model.fit(X_train, y_train)
+# Predict on the test data
+y_pred = model.predict(X_test)
+# Model evaluation
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+# Display results
+print("\nMean Squared Error:", mse)
+print("R-squared:", r2)
+# Display the coefficients and intercept
+print("\nCoefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+#To Display Real Values and Predicted Values
+y_pred = model.predict(X_test)
+for(i,j) in zip(y_test,y_pred):
+    if i!=j:
+        print("Actual value :",i,"Predicted value :",j)
+print("\nNumber of mislabeled points from test data set :", (y_test !=
+y_pred).sum())
+
+
+
+       output
+       ===============
+  C:\Users\mlm\PycharmProjects\pythonProject1\.venv\Scripts\python.exe C:\Users\mlm\PycharmProjects\BIBIN\multiple_linear_regresion.py 
+      TV  Radio  Newspaper  Sales
+0  230.1   37.8       69.2   22.1
+1   44.5   39.3       45.1   10.4
+2   17.2   45.9       69.3   12.0
+3  151.5   41.3       58.5   16.5
+4  180.8   10.8       58.4   17.9
+
+Mean Squared Error: 2.4995417756716787
+R-squared: 0.9189265932005319
+
+Coefficients: [0.05362192 0.10416639 0.00322619]
+Intercept: 4.71654211880251
+Actual value : 9.7 Predicted value : 9.301454111587606
+Actual value : 12.6 Predicted value : 8.943190003856639
+Actual value : 20.9 Predicted value : 18.136044786547107
+Actual value : 11.8 Predicted value : 11.29227564829296
+Actual value : 17.6 Predicted value : 14.694777210181664
+Actual value : 21.5 Predicted value : 20.972651245138728
+Actual value : 10.1 Predicted value : 12.96291873153026
+Actual value : 20.2 Predicted value : 21.247544112095035
+Actual value : 8.8 Predicted value : 9.653365927828306
+Actual value : 14.6 Predicted value : 15.166248133167906
+Actual value : 11.3 Predicted value : 10.621629361262833
+Actual value : 16.9 Predicted value : 17.91862941379425
+Actual value : 14.0 Predicted value : 12.458385096214238
+Actual value : 7.0 Predicted value : 8.147644859518246
+Actual value : 5.5 Predicted value : 8.168621939959259
+Actual value : 20.7 Predicted value : 19.2096244739872
+Actual value : 24.4 Predicted value : 24.110761329230655
+Actual value : 19.6 Predicted value : 20.137715738305612
+Actual value : 5.6 Predicted value : 7.240616088566025
+Actual value : 10.8 Predicted value : 10.927651705869277
+Actual value : 12.9 Predicted value : 12.34440307294536
+Actual value : 23.8 Predicted value : 21.308323501219057
+Actual value : 11.3 Predicted value : 10.973701702144208
+Actual value : 18.9 Predicted value : 20.95446516819213
+Actual value : 22.4 Predicted value : 20.333667850508004
+Actual value : 21.2 Predicted value : 19.509769568011002
+Actual value : 13.7 Predicted value : 10.759572623733195
+Actual value : 10.7 Predicted value : 11.111794691962409
+Actual value : 11.9 Predicted value : 12.549698705186886
+Actual value : 9.5 Predicted value : 10.181756057965991
+Actual value : 11.8 Predicted value : 11.66644357022805
+Actual value : 16.7 Predicted value : 17.25063726598674
+Actual value : 8.5 Predicted value : 8.87922257588744
+Actual value : 6.6 Predicted value : 7.4954136610736
+Actual value : 20.7 Predicted value : 19.25092203233209
+Actual value : 4.8 Predicted value : 5.399666253679715
+Actual value : 8.0 Predicted value : 9.662716449648547
+Actual value : 17.7 Predicted value : 19.377884486084874
+Actual value : 13.2 Predicted value : 14.073397297302147
+Actual value : 7.3 Predicted value : 9.33348214137789
+
+Number of mislabeled points from test data set : 40
+
+Process finished with exit code 0
+
